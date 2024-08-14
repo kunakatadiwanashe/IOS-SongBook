@@ -7,6 +7,10 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+import OnboardScreen from './screens/onboardScreen';
+import HomeScreen from './screens/HomeScreen';
+import BottomNavigator  from './navigation/BottomNavigation'
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -29,7 +33,8 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="BoardScreen" component={OnboardScreen} />
+        <Stack.Screen name="Home" component={BottomNavigator} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>
