@@ -8,11 +8,16 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
+  FlatList
 } from "react-native";
-// import { ScrollView,TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import categories from "@/assets/consts/categories";
-import { FlatList } from "react-native-gesture-handler";
+import songs from "@/assets/consts/songs";
+
+
+const {width} = Dimensions.get("screen")
+const cardWidth = width/1 - 20
 
 const HomeScreen = () => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
@@ -51,7 +56,16 @@ const HomeScreen = () => {
     );
   };
 
-  const Card = () =>{
+  const Card = ({songs}) =>{
+    return (
+      <View style={style.card} >
+        <View style={{alignItems: 'left', paddingLeft: 40 ,paddingTop: 10}} >
+          <Text style={{fontWeight: 'bold',fontSize: 18}}>{songs.name}</Text>
+          <Text style={{fontSize: 14}}>{songs.nameEng}</Text>
+          <Text style={{fontSize: 10,color: '#ff0000',}}>{songs.writer}</Text>
+       </View>
+      </View>
+    )
 
   }
 
@@ -98,7 +112,7 @@ const HomeScreen = () => {
      showsVerticalScrollIndicator={false}
      numColumns={2}
      data={songs}
-     renderItem={({item})=> <Card />}
+     renderItem={({item})=> <Card songs={item} />}
     />
 
 
@@ -154,5 +168,15 @@ const style = StyleSheet.create({
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
+  },
+  card: {
+    height: 70,
+    width: cardWidth,
+    marginHorizontal: 10,
+    marginBottom: 20,
+    marginTop: 8,
+    borderRadius: 5,
+    elevation: 13,
+    backgroundColor: 'white',
   },
 });
