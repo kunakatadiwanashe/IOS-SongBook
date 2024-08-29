@@ -9,17 +9,21 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
-  FlatList
+  FlatList,
+  TouchableHighlight
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import categories from "@/assets/consts/categories";
 import songs from "@/assets/consts/songs";
 
 
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 const {width} = Dimensions.get("screen")
 const cardWidth = width/1 - 20
 
-const HomeScreen = () => {
+const Home = ({navigation}) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
 
   const ListCategory = () => {
@@ -33,7 +37,6 @@ const HomeScreen = () => {
           <TouchableOpacity key={index} activeOpacity={0.8}
             onPress={() => setSelectedCategoryIndex(index)}>
             <View
-              style={{ ...style.categoryBtn }}
               style={{
                 backgroundColor:
                   selectedCategoryIndex == index ? "red" : "white",
@@ -58,20 +61,31 @@ const HomeScreen = () => {
 
   const Card = ({songs}) =>{
     return (
+      <TouchableHighlight 
+      underlayColor={'white'} 
+      activeOpacity={0.9} 
+      onPress={() => navigation.navigate('FullSong', songs)}>
       <View style={style.card} >
-        <View style={{alignItems: 'left', paddingLeft: 40 ,paddingTop: 10}} >
+        
+        <Text style={{fontSize: 20, fontWeight: 'bold',backgroundColor: '#660a0a',width: 25,textAlign: 'center',marginLeft: 10,paddingTop: 13,color: 'white'}}>{songs.id}</Text>
+        <View style={{alignItems: 'left', paddingLeft: 55,marginTop: -25 }} >
           <Text style={{fontWeight: 'bold',fontSize: 18}}>{songs.name}</Text>
           <Text style={{fontSize: 14}}>{songs.nameEng}</Text>
           <Text style={{fontSize: 10,color: '#ff0000',}}>{songs.writer}</Text>
        </View>
+        
+
+
       </View>
+      </TouchableHighlight>
     )
+    
 
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={style.header}>
+      {/* <View style={style.header}>
         <View style={{ paddingLeft: 16 }}>
           <View style={{ flexDirection: "row" }}>
             <Text style={{ fontSize: 20 }}>Hello</Text>
@@ -84,10 +98,10 @@ const HomeScreen = () => {
           </Text>
         </View>
         <Image
-          source={require("../../assets/images/kun.png")}
+          source={require("../assets/images/kun.png")}
           style={{ height: 50, width: 50, borderRadius: 25 }}
         />
-      </View>
+      </View> */}
 
       <View
         style={{ marginTop: 40, flexDirection: "row", paddingHorizontal: 20 }}
@@ -120,7 +134,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default Home;
 
 const style = StyleSheet.create({
   header: {
@@ -170,7 +184,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   card: {
-    height: 70,
+    height: 82,
     width: cardWidth,
     marginHorizontal: 10,
     marginBottom: 20,
