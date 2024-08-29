@@ -4,6 +4,7 @@ const songs = [
       name: 'Mwari Baba',
       nameEng: 'God The Father',
       writer: 'Catherine Baird (1896-1984)',
+       fullsong: '1.Nomukutambudzwa ,MakamutsurudzaMwoyo yavatendi,Vakakushumirai.2.Izwi rakavanda,Tokuona zvino apatinofamba,Kristu ari pano.3.Togara ari,Iye wokudenga; gatimutsvagei,Dakara tamuda.4.O Ishe mupenyu,Mwoyo yodudziraRunako rwenyu, ‘She,Nokubwinya kwenyu.'
     },
     {
         id: '2',
